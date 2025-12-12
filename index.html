@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guilty Finder 😈</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .app {
+      background: #111;
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.8rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: none;
+      margin: 12px 0;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: #ff4d4d;
+      color: #fff;
+    }
+
+    button:hover {
+      background: #ff6b6b;
+    }
+
+    .result {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .result img {
+      width: 100%;
+      border-radius: 14px;
+      margin-bottom: 12px;
+    }
+
+    .quote {
+      font-style: italic;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>Who is guilty for… 🤔</h1>
+
+    <input id="reason" type="text" placeholder="eating the last pizza slice" />
+    <button id="findBtn">Find a victim</button>
+
+    <div class="result" id="result">
+      <img id="personImg" src="" alt="Guilty person" />
+      <div class="quote" id="quote"></div>
+    </div>
+  </div>
+
+  <script>
+    const images = [
+      "./pic/1.jpg",
+      "./pic/2.jpg",
+      "./pic/3.jpg",
+      "./pic/4.jpg",
+      "./pic/5.jpg"
+    ];
+
+    const itJokes = [
+  // Classic dev jokes
+  "Blamed because it worked on my machine.",
+  "This bug is not a bug, it’s an undocumented feature.",
+  "Guilty of pushing to production on Friday.",
+  "404: Innocence not found.",
+  "It’s always DNS. Even when it’s not.",
+  "I didn’t break it. I just tested your backups.",
+  "Works as designed (the design is wrong).",
+  "There are 10 types of people: those who understand binary and those who don’t.",
+
+  // Backend / infra jokes
+  "Guilty of forgetting to add an index.",
+  "Restart fixed it. Case closed.",
+  "This outage was caused by a missing semicolon (probably).",
+  "Blamed for memory leaks… again.",
+  "If it hurts, add more RAM.",
+  "In Kubernetes we trust. Sometimes.",
+
+  // JavaScript / web jokes
+  "Guilty of `npm install` fixing everything.",
+  "Undefined is not a function, but this person is.",
+  "Blamed for callback hell.",
+  "`==` was a mistake.",
+  "One does not simply center a div.",
+
+  // Funny accusations
+  "Declared guilty of merging without code review.",
+  "Responsible for all bugs since 1995.",
+  "Blamed for production logs saying `TODO: fix later`.",
+  "Accused of deleting the database (again).",
+  "Guilty of saying ‘just a small change’.",
+  "Blamed for deploying straight to main.",
+  "The server was down… this person looked at it.",
+  "Everything was fine until this commit.",
+  "Guilty of commenting out the failing test.",
+  "Approved their own pull request."
+];
+
+function getRandomJoke() {
+  return itJokes[Math.floor(Math.random() * itJokes.length)];
+}
+
+    const btn = document.getElementById("findBtn");
+    const result = document.getElementById("result");
+    const img = document.getElementById("personImg");
+    const quoteEl = document.getElementById("quote");
+    const reasonInput = document.getElementById("reason");
+
+    btn.addEventListener("click", () => {
+      const randomImg = images[Math.floor(Math.random() * images.length)];
+      const randomQuote = getRandomJoke();
+      const reason = reasonInput.value.trim();
+
+      img.src = randomImg;
+      quoteEl.textContent = reason
+        ? `Guilty for ${reason}. ${randomQuote}`
+        : randomQuote;
+
+      result.style.display = "block";
+    });
+  </script>
+</body>
+</html>
